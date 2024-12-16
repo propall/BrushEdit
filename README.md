@@ -34,6 +34,7 @@ https://github.com/user-attachments/assets/fde82f21-8b36-4584-8460-c109c195e614
     - [👻 Demo Features](#-demo-features)
   - [🤝🏼 Cite Us](#-cite-us)
   - [💖 Acknowledgement](#-acknowledgement)
+  - [❓ Contact](#-contact)
 
 ## TODO
 
@@ -161,7 +162,10 @@ sh app/run_app.sh
 ### 👻 Demo Features
 
 <img src="assets/demo_vis.png" alt="demo_vis" width="auto" height="500">
-💡 <b>Fundamental Features</b>:
+
+
+<b>Fundamental Features</b>:
+
 <ul>  
     <li> 🎨 <b>Aspect Ratio</b>: Select the aspect ratio of the image. To prevent OOM, 1024px is the maximum resolution.</li>
     <li> 🎨 <b>VLM Model</b>: Select the VLM model. We use preloaded models to save time. To use other VLM models, download them and uncomment the relevant lines in vlm_template.py from our GitHub repo. </li>
@@ -202,6 +206,9 @@ sh app/run_app.sh
 
 ## 💖 Acknowledgement
 
-`<span id="acknowledgement">`
-
+<span id="acknowledgement">
 Our code is modified based on [diffusers](https://github.com/huggingface/diffusers) and [BrushNet](https://github.com/TencentARC/BrushNet) here, thanks to all the contributors!
+
+
+## ❓ Contact
+For any question, feel free to email `liyaowei01@gmail.com`.
