@@ -207,7 +207,7 @@ sh app/run_app.sh
 ## 💖 Acknowledgement
 
 <span id="acknowledgement">
-Our code is modified based on [diffusers](https://github.com/huggingface/diffusers) and [BrushNet](https://github.com/TencentARC/BrushNet) here, thanks to all the contributors!
+Our code is modified based on ![diffusers](https://github.com/huggingface/diffusers) and ![BrushNet](https://github.com/TencentARC/BrushNet) here, thanks to all the contributors!
 
 
 ## ❓ Contact
