@@ -13,7 +13,7 @@ Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, M
 <p align="center">
   <a href="https://liyaowei-stu.github.io/project/BrushEdit/">🌐Project Page</a> |
   <a href="https://arxiv.org/abs/2412.10316">📜Arxiv</a> |
-  <a href="https://drive.google.com/file/d/1NBuCVicoQ3d3VZo-_nNIRhB4k9EVZFLV/preview">📹Video</a> |
+  <a href="https://www.youtube.com/watch?v=nDB7un9Rbdk">📹Video</a> |
   <a href="https://huggingface.co/spaces/TencentARC/BrushEdit">🤗Hugging Face Demo</a> |
 </p>
 
