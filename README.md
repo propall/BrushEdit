@@ -180,7 +180,7 @@ sh app/run_app.sh
     <li> 🎨 <b>Control length</b>: The intensity of editing and inpainting. </li>
 </ul>
 
-💡 `<b>`Advanced Features`</b>`:
+💡 <b>Advanced Features</b>:
 
 <ul>  
     <li> 🎨 <b>Base Model</b>: We use preloaded models to save time. To use other VLM models, download them and uncomment the relevant lines in vlm_template.py from our GitHub repo. </li>
