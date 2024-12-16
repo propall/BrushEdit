@@ -1,0 +1,3 @@
+seed: 642087011
+target prompt: cowboy hat.
+blending: False.
