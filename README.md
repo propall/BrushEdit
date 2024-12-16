@@ -4,11 +4,11 @@
 
 Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, MLLM Agent, Instruction-basd Editing
 
-> TL;DR: BrushEdit is an advanced, unified AI agent for image inpainting and editing. `<br>`
+> TL;DR: BrushEdit is an advanced, unified AI agent for image inpainting and editing. <br>
 > Main Elements: 🛠️ Fully automated / 🤠 Interactive editing.
 
-> [Yaowei Li](https://github.com/liyaowei-stu)`<sup>`1*`</sup>`, [Yuxuan Bian](https://yxbian23.github.io/)`<sup>`3*`</sup>`, [Xuan Ju](https://github.com/juxuan27)`<sup>`3*`</sup>`, [Zhaoyang Zhang](https://zzyfd.github.io/#/)`<sup>`2‡`</sup>`, [Junhao Zhuang](https://github.com/zhuang2002)`<sup>`4`</sup>`, [Ying Shan](https://www.linkedin.com/in/YingShanProfile/)`<sup>`2`</sup>`, [Yuexian Zou](https://www.ece.pku.edu.cn/info/1046/2146.htm)`<sup>`1✉`</sup><br>`, [Qiang Xu](https://cure-lab.github.io/)`<sup>`3✉`</sup><br>`
-> `<sup>`1`</sup>`Peking University `<sup>`2`</sup>`ARC Lab, Tencent PCG  `<sup>`3`</sup>`The Chinese University of Hong Kong `<sup>`4`</sup>`Tsinghua University `<br>` `<sup>`*`</sup>`Equal Contribution `<sup>`‡`</sup>`Project Lead `<sup>`✉`</sup>`Corresponding Author
+>[Yaowei Li](https://github.com/liyaowei-stu)<sup>1*</sup>, [Yuxuan Bian](https://yxbian23.github.io/)<sup>3*</sup>, [Xuan Ju](https://github.com/juxuan27)<sup>3*</sup>, [Zhaoyang Zhang](https://zzyfd.github.io/#/)<sup>2‡</sup>, [Junhao Zhuang](https://github.com/zhuang2002)<sup>4</sup>, [Ying Shan](https://www.linkedin.com/in/YingShanProfile/)<sup>2</sup>, [Yuexian Zou](https://www.ece.pku.edu.cn/info/1046/2146.htm)<sup>1✉</sup><br>, [Qiang Xu](https://cure-lab.github.io/)<sup>3✉</sup><br>
+><sup>1</sup>Peking University <sup>2</sup>ARC Lab, Tencent PCG  <sup>3</sup>The Chinese University of Hong Kong <sup>4</sup>Tsinghua University <br> <sup>*</sup>Equal Contribution <sup>‡</sup>Project Lead <sup>✉</sup>`Corresponding Author
 
 <p align="center">
   <a href="https://liyaowei-stu.github.io/project/BrushEdit/">🌐Project Page</a> |
