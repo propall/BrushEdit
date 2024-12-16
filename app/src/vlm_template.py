@@ -28,22 +28,22 @@ vlms_list = [
     #             "llava-hf/llava-v1.6-mistral-7b-hf", torch_dtype=torch_dtype, device_map=device
     #         ).to("cpu"),
     # },
-    # {
-    #     "type": "llava-next",
-    #     "name": "llama3-llava-next-8b-hf (Preload)",
-    #     "local_path": "models/vlms/llama3-llava-next-8b-hf",
-    #     "processor": LlavaNextProcessor.from_pretrained(
-    #         "models/vlms/llama3-llava-next-8b-hf"
-    #     ) if os.path.exists("models/vlms/llama3-llava-next-8b-hf") else LlavaNextProcessor.from_pretrained(
-    #         "llava-hf/llama3-llava-next-8b-hf"
-    #     ),
-    #     "model": LlavaNextForConditionalGeneration.from_pretrained(
-    #         "models/vlms/llama3-llava-next-8b-hf", torch_dtype=torch_dtype, device_map=device
-    #     ).to("cpu") if os.path.exists("models/vlms/llama3-llava-next-8b-hf") else 
-    #         LlavaNextForConditionalGeneration.from_pretrained(
-    #             "llava-hf/llama3-llava-next-8b-hf", torch_dtype=torch_dtype, device_map=device
-    #         ).to("cpu"),
-    # },
+    {
+        "type": "llava-next",
+        "name": "llama3-llava-next-8b-hf (Preload)",
+        "local_path": "models/vlms/llama3-llava-next-8b-hf",
+        "processor": LlavaNextProcessor.from_pretrained(
+            "models/vlms/llama3-llava-next-8b-hf"
+        ) if os.path.exists("models/vlms/llama3-llava-next-8b-hf") else LlavaNextProcessor.from_pretrained(
+            "llava-hf/llama3-llava-next-8b-hf"
+        ),
+        "model": LlavaNextForConditionalGeneration.from_pretrained(
+            "models/vlms/llama3-llava-next-8b-hf", torch_dtype=torch_dtype, device_map=device
+        ).to("cpu") if os.path.exists("models/vlms/llama3-llava-next-8b-hf") else 
+            LlavaNextForConditionalGeneration.from_pretrained(
+                "llava-hf/llama3-llava-next-8b-hf", torch_dtype=torch_dtype, device_map=device
+            ).to("cpu"),
+    },
     # {
     #     "type": "llava-next",
     #     "name": "llava-v1.6-vicuna-13b-hf",
