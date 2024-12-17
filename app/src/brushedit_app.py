@@ -1697,5 +1697,6 @@ with block as demo:
     ## reset func
     reset_button.click(fn=reset_func, inputs=[input_image, original_image, original_mask, prompt, target_prompt], outputs=[input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, resize_default, invert_mask_state])
     
-    
+## if have a localhost access error, try to use the following code
+# demo.launch(server_name="0.0.0.0", server_port=12345)
 demo.launch()

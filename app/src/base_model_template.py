@@ -21,20 +21,20 @@ brushnet = BrushNetModel.from_pretrained(brushnet_path, torch_dtype=torch_dtype)
 
 
 base_models_list = [
-    {
-        "name": "dreamshaper_8 (Preload)",
-        "local_path": "models/base_model/dreamshaper_8",
-        "pipe": StableDiffusionBrushNetPipeline.from_pretrained(
-            "models/base_model/dreamshaper_8", brushnet=brushnet, torch_dtype=torch_dtype, low_cpu_mem_usage=False
-        ).to(device)
-    },
-    {
-        "name": "epicrealism (Preload)",
-        "local_path": "models/base_model/epicrealism_naturalSinRC1VAE",
-        "pipe": StableDiffusionBrushNetPipeline.from_pretrained(
-            "models/base_model/epicrealism_naturalSinRC1VAE", brushnet=brushnet, torch_dtype=torch_dtype, low_cpu_mem_usage=False
-        ).to(device)
-    },
+    # {
+    #     "name": "dreamshaper_8 (Preload)",
+    #     "local_path": "models/base_model/dreamshaper_8",
+    #     "pipe": StableDiffusionBrushNetPipeline.from_pretrained(
+    #         "models/base_model/dreamshaper_8", brushnet=brushnet, torch_dtype=torch_dtype, low_cpu_mem_usage=False
+    #     ).to(device)
+    # },
+    # {
+    #     "name": "epicrealism (Preload)",
+    #     "local_path": "models/base_model/epicrealism_naturalSinRC1VAE",
+    #     "pipe": StableDiffusionBrushNetPipeline.from_pretrained(
+    #         "models/base_model/epicrealism_naturalSinRC1VAE", brushnet=brushnet, torch_dtype=torch_dtype, low_cpu_mem_usage=False
+    #     ).to(device)
+    # },
     {
         "name": "henmixReal (Preload)",
         "local_path": "models/base_model/henmixReal_v5c",
