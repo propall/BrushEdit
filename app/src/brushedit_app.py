@@ -5,6 +5,7 @@ import numpy as np
 import requests
 import torch
 
+
 import gradio as gr
 
 from PIL import Image
@@ -335,7 +336,7 @@ vlm_type, vlm_local_path, vlm_processor, vlm_model = vlms_template[DEFAULT_VLM_M
 if vlm_processor != "" and vlm_model != "":
     vlm_model.to(device)
 else:
-    gr.Error("Please Download default VLM model "+ DEFAULT_VLM_MODEL_NAME +" first.")
+    raise gr.Error("Please Download default VLM model "+ DEFAULT_VLM_MODEL_NAME +" first.")
 
 
 ## init base model
@@ -502,7 +503,7 @@ def random_mask_func(mask, dilation_type='square', dilation_size=20):
         dilated_mask = np.zeros_like(binary_mask, dtype=bool)
         dilated_mask[ellipse_mask] = True
     else:
-        raise ValueError("dilation_type must be 'square' or 'ellipse'")
+        ValueError("dilation_type must be 'square' or 'ellipse'")
 
     # use binary dilation
     dilated_mask =  np.uint8(dilated_mask[:,:,np.newaxis]) * 255
@@ -609,6 +610,7 @@ def submit_GPT4o_KEY(GPT4o_KEY):
         return "Invalid GPT4o API Key", "GPT4-o (Highly Recommended)"
     
 
+    
 def process(input_image, 
     original_image, 
     original_mask, 
@@ -633,7 +635,8 @@ def process(input_image,
             image_pil = input_image["background"].convert("RGB")
             original_image = np.array(image_pil)
     if prompt is None or prompt == "":
-        raise gr.Error("Please input your instructions, e.g., remove the xxx")
+        if target_prompt is None or target_prompt == "":
+            raise gr.Error("Please input your instructions, e.g., remove the xxx")
     
     alpha_mask = input_image["layers"][0].split()[3]
     input_mask = np.asarray(alpha_mask)
@@ -683,17 +686,23 @@ def process(input_image,
             original_mask = input_mask
 
     
-
+    ## inpainting directly if target_prompt is not None
     if category is not None:
-        pass 
+        pass
+    elif target_prompt is not None and len(target_prompt) >= 1 and original_mask is not None:
+        pass
     else:
-        category = vlm_response_editing_type(vlm_processor, vlm_model, original_image, prompt, device)
+        try:
+            category = vlm_response_editing_type(vlm_processor, vlm_model, original_image, prompt, device)
+        except Exception as e:
+            raise gr.Error("Please select the correct VLM model and input the correct API Key first!")
     
-    
+
     if original_mask is not None:
         original_mask = np.clip(original_mask, 0, 255).astype(np.uint8)
     else:
-        object_wait_for_edit = vlm_response_object_wait_for_edit(
+        try:
+            object_wait_for_edit = vlm_response_object_wait_for_edit(
                                                 vlm_processor, 
                                                 vlm_model, 
                                                 original_image,
@@ -701,30 +710,37 @@ def process(input_image,
                                                 prompt,
                                                 device)
 
-        original_mask = vlm_response_mask(vlm_processor,
-                                          vlm_model,
-                                          category, 
-                                          original_image, 
-                                          prompt, 
-                                          object_wait_for_edit, 
-                                          sam,
-                                          sam_predictor,
-                                          sam_automask_generator,
-                                          groundingdino_model,
-                                          device)
+            original_mask = vlm_response_mask(vlm_processor,
+                                            vlm_model,
+                                            category, 
+                                            original_image, 
+                                            prompt, 
+                                            object_wait_for_edit, 
+                                            sam,
+                                            sam_predictor,
+                                            sam_automask_generator,
+                                            groundingdino_model,
+                                            device)
+        except Exception as e:
+            raise gr.Error("Please select the correct VLM model and input the correct API Key first!")
+
     if original_mask.ndim == 2:
         original_mask = original_mask[:,:,None]
     
 
-    if len(target_prompt) <= 1:
-        prompt_after_apply_instruction = vlm_response_prompt_after_apply_instruction(
+    if target_prompt is not None and len(target_prompt) >= 1:
+        prompt_after_apply_instruction = target_prompt
+        
+    else:
+        try:
+            prompt_after_apply_instruction = vlm_response_prompt_after_apply_instruction(
                                                                     vlm_processor, 
                                                                     vlm_model, 
                                                                     original_image,
                                                                     prompt,
                                                                     device)
-    else:
-        prompt_after_apply_instruction = target_prompt
+        except Exception as e:
+            raise gr.Error("Please select the correct VLM model and input the correct API Key first!")
 
     generator = torch.Generator(device).manual_seed(random.randint(0, 2147483647) if randomize_seed else seed)
 
@@ -754,7 +770,8 @@ def process(input_image,
     # image[3].save(f"outputs/image_edit_{uuid}_3.png")
     # mask_image.save(f"outputs/mask_{uuid}.png")
     # masked_image.save(f"outputs/masked_image_{uuid}.png")
-    return image, [mask_image], [masked_image], prompt, '', prompt_after_apply_instruction, False
+    gr.Info(f"Target Prompt: {prompt_after_apply_instruction}", duration=20)
+    return image, [mask_image], [masked_image], prompt, '', False
 
 
 def generate_target_prompt(input_image, 
@@ -770,7 +787,7 @@ def generate_target_prompt(input_image,
                                                             original_image,
                                                             prompt,
                                                             device)
-    return prompt_after_apply_instruction, prompt_after_apply_instruction
+    return prompt_after_apply_instruction
 
 
 def process_mask(input_image, 
@@ -1411,7 +1428,7 @@ def init_img(base,
         original_mask = np.array(mask_gallery[0]).astype(np.uint8)[:,:,None] # h,w,1
         return base, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, "", "", "", "Custom resolution", False, False, example_change_times
     else:
-        return base, original_image, None, "", None, None, None, "", "", "", aspect_ratio, True, False, 0
+        return base, original_image, None, "", None, None, None, "", "", aspect_ratio, True, False, 0
 
 
 def reset_func(input_image, 
@@ -1419,7 +1436,7 @@ def reset_func(input_image,
                original_mask, 
                prompt, 
                target_prompt, 
-               target_prompt_output):
+               ):
     input_image = None
     original_image = None
     original_mask = None
@@ -1428,10 +1445,9 @@ def reset_func(input_image,
     masked_gallery = []
     result_gallery = []
     target_prompt = ''
-    target_prompt_output = ''
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
-    return input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, target_prompt_output, True, False
+    return input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, True, False
 
 
 def update_example(example_type, 
@@ -1454,14 +1470,15 @@ def update_example(example_type,
     original_mask = np.array(mask_gallery[0]).astype(np.uint8)[:,:,None] # h,w,1
     aspect_ratio = "Custom resolution"
     example_change_times += 1
-    return input_image, prompt, original_image, original_mask, mask_gallery, masked_gallery, result_gallery, aspect_ratio, "", "", False, example_change_times
+    return input_image, prompt, original_image, original_mask, mask_gallery, masked_gallery, result_gallery, aspect_ratio, "", False, example_change_times
+
 
 block = gr.Blocks(
         theme=gr.themes.Soft(
              radius_size=gr.themes.sizes.radius_none,
              text_size=gr.themes.sizes.text_md
          )
-        ).queue()
+        )
 with block as demo:
     with gr.Row():
         with gr.Column(): 
@@ -1494,6 +1511,8 @@ with block as demo:
                     sources=["upload"],
                     )
 
+            prompt = gr.Textbox(label="⌨️ Instruction", placeholder="Please input your instruction.", value="",lines=1)
+            run_button = gr.Button("💫 Run")
             
             vlm_model_dropdown = gr.Dropdown(label="VLM model", choices=VLM_MODEL_NAMES, value=DEFAULT_VLM_MODEL_NAME, interactive=True)
             with gr.Group():    
@@ -1505,12 +1524,6 @@ with block as demo:
 
             aspect_ratio = gr.Dropdown(label="Output aspect ratio", choices=ASPECT_RATIO_LABELS, value=DEFAULT_ASPECT_RATIO)
             resize_default = gr.Checkbox(label="Short edge resize to 640px", value=True)
-
-
-            prompt = gr.Textbox(label="⌨️ Instruction", placeholder="Please input your instruction.", value="",lines=1)
-
-            run_button = gr.Button("💫 Run")
-
 
             with gr.Row():
                 mask_button = gr.Button("Generate Mask")
@@ -1599,7 +1612,7 @@ with block as demo:
             with gr.Tab(elem_classes="feedback", label="Output"):
                 result_gallery = gr.Gallery(label='Output', show_label=True, elem_id="gallery", preview=True, height=400)
 
-            target_prompt_output = gr.Text(label="Output Target Prompt", value="", lines=1, interactive=False)
+            # target_prompt_output = gr.Text(label="Output Target Prompt", value="", lines=1, interactive=False)
 
             reset_button = gr.Button("Reset")
 
@@ -1630,9 +1643,9 @@ with block as demo:
     input_image.upload(
         init_img,
         [input_image, init_type, prompt, aspect_ratio, example_change_times],
-        [input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, target_prompt_output, init_type, aspect_ratio, resize_default, invert_mask_state, example_change_times]
+        [input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, init_type, aspect_ratio, resize_default, invert_mask_state, example_change_times]
     ) 
-    example_type.change(fn=update_example, inputs=[example_type, prompt, example_change_times], outputs=[input_image, prompt, original_image, original_mask, mask_gallery, masked_gallery, result_gallery, aspect_ratio, target_prompt, target_prompt_output, invert_mask_state, example_change_times])
+    example_type.change(fn=update_example, inputs=[example_type, prompt, example_change_times], outputs=[input_image, prompt, original_image, original_mask, mask_gallery, masked_gallery, result_gallery, aspect_ratio, target_prompt, invert_mask_state, example_change_times])
     
     ## vlm and base model dropdown
     vlm_model_dropdown.change(fn=update_vlm_model, inputs=[vlm_model_dropdown], outputs=[status])
@@ -1662,7 +1675,7 @@ with block as demo:
          invert_mask_state]
 
     ## run brushedit
-    run_button.click(fn=process, inputs=ips, outputs=[result_gallery, mask_gallery, masked_gallery, prompt, target_prompt, target_prompt_output, invert_mask_state])
+    run_button.click(fn=process, inputs=ips, outputs=[result_gallery, mask_gallery, masked_gallery, prompt, target_prompt, invert_mask_state])
     
     ## mask func
     mask_button.click(fn=process_mask, inputs=[input_image, original_image, prompt, resize_default, aspect_ratio], outputs=[masked_gallery, mask_gallery, original_mask, category])
@@ -1677,10 +1690,10 @@ with block as demo:
     move_down_button.click(fn=move_mask_down, inputs=[input_image, original_image, original_mask, moving_pixels, resize_default, aspect_ratio], outputs=[masked_gallery, mask_gallery, original_mask])    
 
     ## prompt func
-    generate_target_prompt_button.click(fn=generate_target_prompt, inputs=[input_image, original_image, prompt], outputs=[target_prompt, target_prompt_output])
+    generate_target_prompt_button.click(fn=generate_target_prompt, inputs=[input_image, original_image, prompt], outputs=[target_prompt])
     
     ## reset func
-    reset_button.click(fn=reset_func, inputs=[input_image, original_image, original_mask, prompt, target_prompt, target_prompt_output], outputs=[input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, target_prompt_output, resize_default, invert_mask_state])
+    reset_button.click(fn=reset_func, inputs=[input_image, original_image, original_mask, prompt, target_prompt], outputs=[input_image, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, target_prompt, resize_default, invert_mask_state])
     
     
-demo.launch(server_name="0.0.0.0", server_port=12345, share=False)
+demo.launch()

@@ -98,10 +98,12 @@ def vlm_response_editing_type(vlm_processor,
         messages = create_editing_category_messages_qwen2(editing_prompt)
         response_str = run_qwen2_vl_inference(vlm_processor, vlm_model, messages, image, device=device)
     
-    for category_name in ["Addition","Remove","Local","Global","Background"]:
-        if category_name.lower() in response_str.lower():
-            return category_name
-    raise gr.Error("Please input correct commands, including add, delete, and modify commands. If it still does not work, please switch to a more powerful VLM.")
+    try:
+        for category_name in ["Addition","Remove","Local","Global","Background"]:
+            if category_name.lower() in response_str.lower():
+                return category_name
+    except Exception as e:
+        raise gr.Error("Please input OpenAI API Key. Or please input correct commands, including add, delete, and modify commands. If it still does not work, please switch to a more powerful VLM.")
 
 
 ### response object to be edited        
@@ -206,17 +208,21 @@ def vlm_response_prompt_after_apply_instruction(vlm_processor,
                                                 image, 
                                                 editing_prompt,
                                                 device):
-    if isinstance(vlm_model, OpenAI):
-        base64_image = encode_image(image)  
-        messages = create_apply_editing_messages_gpt4o(editing_prompt, base64_image)
-        response_str = run_gpt4o_vl_inference(vlm_model, messages)
-    elif isinstance(vlm_model, LlavaNextForConditionalGeneration):
-        messages = create_apply_editing_messages_llava(editing_prompt)
-        response_str = run_llava_next_inference(vlm_processor, vlm_model, messages, image, device)
-    elif isinstance(vlm_model, Qwen2VLForConditionalGeneration):
-        base64_image = encode_image(image)  
-        messages = create_apply_editing_messages_qwen2(editing_prompt, base64_image)
-        response_str = run_qwen2_vl_inference(vlm_processor, vlm_model, messages, image, device)
-    else:
-        raise gr.Error("Please select the correct VLM model!")
+                                                
+    try:
+        if isinstance(vlm_model, OpenAI):
+            base64_image = encode_image(image)  
+            messages = create_apply_editing_messages_gpt4o(editing_prompt, base64_image)
+            response_str = run_gpt4o_vl_inference(vlm_model, messages)
+        elif isinstance(vlm_model, LlavaNextForConditionalGeneration):
+            messages = create_apply_editing_messages_llava(editing_prompt)
+            response_str = run_llava_next_inference(vlm_processor, vlm_model, messages, image, device)
+        elif isinstance(vlm_model, Qwen2VLForConditionalGeneration):
+            base64_image = encode_image(image)  
+            messages = create_apply_editing_messages_qwen2(editing_prompt, base64_image)
+            response_str = run_qwen2_vl_inference(vlm_processor, vlm_model, messages, image, device)
+        else:
+            raise gr.Error("Please select the correct VLM model and input the correct API Key first!")
+    except Exception as e:
+        raise gr.Error("Please select the correct VLM model and input the correct API Key first!")
     return response_str
