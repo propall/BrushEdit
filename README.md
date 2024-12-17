@@ -7,7 +7,7 @@ Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, M
 > TL;DR: BrushEdit is an advanced, unified AI agent for image inpainting and editing. <br>
 > Main Elements: 🛠️ Fully automated / 🤠 Interactive editing.
 
->[Yaowei Li](https://github.com/liyaowei-stu)<sup>1*</sup>, [Yuxuan Bian](https://yxbian23.github.io/)<sup>3*</sup>, [Xuan Ju](https://github.com/juxuan27)<sup>3*</sup>, [Zhaoyang Zhang](https://zzyfd.github.io/#/)<sup>2‡</sup>, [Junhao Zhuang](https://github.com/zhuang2002)<sup>4</sup>, [Ying Shan](https://www.linkedin.com/in/YingShanProfile/)<sup>2</sup>, [Yuexian Zou](https://www.ece.pku.edu.cn/info/1046/2146.htm)<sup>1✉</sup><br>, [Qiang Xu](https://cure-lab.github.io/)<sup>3✉</sup><br>
+>[Yaowei Li](https://github.com/liyaowei-stu)<sup>1*</sup>, [Yuxuan Bian](https://yxbian23.github.io/)<sup>3*</sup>, [Xuan Ju](https://github.com/juxuan27)<sup>3*</sup>, [Zhaoyang Zhang](https://zzyfd.github.io/#/)<sup>2‡</sup>, [Junhao Zhuang](https://github.com/zhuang2002)<sup>4</sup>, [Ying Shan](https://www.linkedin.com/in/YingShanProfile/)<sup>2✉</sup>, [Yuexian Zou](https://www.ece.pku.edu.cn/info/1046/2146.htm)<sup>1✉</sup><br>, [Qiang Xu](https://cure-lab.github.io/)<sup>3✉</sup><br>
 ><sup>1</sup>Peking University <sup>2</sup>ARC Lab, Tencent PCG  <sup>3</sup>The Chinese University of Hong Kong <sup>4</sup>Tsinghua University <br> <sup>*</sup>Equal Contribution <sup>‡</sup>Project Lead <sup>✉</sup>Corresponding Author
 
 <p align="center">
@@ -15,6 +15,7 @@ Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, M
   <a href="https://arxiv.org/abs/2412.10316">📜Arxiv</a> |
   <a href="https://www.youtube.com/watch?v=nDB7un9Rbdk">📹Video</a> |
   <a href="https://huggingface.co/spaces/TencentARC/BrushEdit">🤗Hugging Face Demo</a> |
+  
 </p>
 
 https://github.com/user-attachments/assets/fde82f21-8b36-4584-8460-c109c195e614
@@ -164,7 +165,7 @@ sh app/run_app.sh
 <img src="assets/demo_vis.png" alt="demo_vis" width="auto" height="500">
 
 
-<b>Fundamental Features</b>:
+💡 <b>Fundamental Features</b>:
 
 <ul>  
     <li> 🎨 <b>Aspect Ratio</b>: Select the aspect ratio of the image. To prevent OOM, 1024px is the maximum resolution.</li>
@@ -205,9 +206,7 @@ sh app/run_app.sh
 ```
 
 ## 💖 Acknowledgement
-
-<span id="acknowledgement">
-Our code is modified based on ![diffusers](https://github.com/huggingface/diffusers) and ![BrushNet](https://github.com/TencentARC/BrushNet) here, thanks to all the contributors!
+Our code is modified based on [diffusers](https://github.com/huggingface/diffusers) and [BrushNet](https://github.com/TencentARC/BrushNet) here, thanks to all the contributors!
 
 
 ## ❓ Contact
