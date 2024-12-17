@@ -15,7 +15,7 @@ Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, M
   <a href="https://arxiv.org/abs/2412.10316">📜Arxiv</a> |
   <a href="https://www.youtube.com/watch?v=nDB7un9Rbdk">📹Video</a> |
   <a href="https://huggingface.co/spaces/TencentARC/BrushEdit">🤗Hugging Face Demo</a> |
-  
+  <a href="https://huggingface.co/TencentARC/BrushEdit">🤗Hugging Model</a> |
 </p>
 
 https://github.com/user-attachments/assets/fde82f21-8b36-4584-8460-c109c195e614
