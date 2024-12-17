@@ -1426,8 +1426,10 @@ def init_img(base,
         masked_gallery[0] = masked_gallery[0].resize((width_new, height_new))
         result_gallery[0] = result_gallery[0].resize((width_new, height_new))
         original_mask = np.array(mask_gallery[0]).astype(np.uint8)[:,:,None] # h,w,1
-        return base, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, "", "", "", "Custom resolution", False, False, example_change_times
+        return base, original_image, original_mask, prompt, mask_gallery, masked_gallery, result_gallery, "", "", "Custom resolution", False, False, example_change_times
     else:
+        if aspect_ratio not in ASPECT_RATIO_LABELS:
+            aspect_ratio = "Custom resolution"
         return base, original_image, None, "", None, None, None, "", "", aspect_ratio, True, False, 0
 
 
