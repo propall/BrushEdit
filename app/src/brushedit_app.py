@@ -1511,6 +1511,7 @@ with block as demo:
                     interactive=True,
                     height=1024,
                     sources=["upload"],
+                    placeholder="Please click here or the icon below to upload the image.",
                     )
 
             prompt = gr.Textbox(label="⌨️ Instruction", placeholder="Please input your instruction.", value="",lines=1)
