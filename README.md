@@ -214,7 +214,7 @@ For any question, feel free to email `liyaowei01@gmail.com`.
 
 ## 🌟 Star History
 <p align="center">
-    <a href="https://star-history.com/#Dai-Wenxun/MotionLCM" target="_blank">
+    <a href="https://star-history.com/#TencentARC/BrushEdit" target="_blank">
         <img width="500" src="https://api.star-history.com/svg?repos=TencentARC/BrushEdit&type=Date" alt="Star History Chart">
     </a>
 <p>
