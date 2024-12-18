@@ -211,3 +211,10 @@ Our code is modified based on [diffusers](https://github.com/huggingface/diffuse
 
 ## ❓ Contact
 For any question, feel free to email `liyaowei01@gmail.com`.
+
+## 🌟 Star History
+<p align="center">
+    <a href="https://star-history.com/#Dai-Wenxun/MotionLCM" target="_blank">
+        <img width="500" src="https://api.star-history.com/svg?repos=TencentARC/BrushEdit&type=Date" alt="Star History Chart">
+    </a>
+<p>
