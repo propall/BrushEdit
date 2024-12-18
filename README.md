@@ -197,12 +197,14 @@ sh app/run_app.sh
 ```
 @misc{li2024brushedit,
   title={BrushEdit: All-In-One Image Inpainting and Editing}, 
-  author={Yaowei Li and Yuxuan Bian and Xuan Ju and Zhaoyang Zhang and and Junhao Zhuang and Ying Shan and Qiang Xu},
+  author={Yaowei Li and Yuxuan Bian and Xuan Ju and Zhaoyang Zhang and and Junhao Zhuang and Ying Shan and Yuexian Zou and Qiang Xu},
   year={2024},
   eprint={2412.10316},
   archivePrefix={arXiv},
   primaryClass={cs.CV}
 }
+
+
 ```
 
 ## 💖 Acknowledgement
