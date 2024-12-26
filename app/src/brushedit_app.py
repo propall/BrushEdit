@@ -720,7 +720,7 @@ def process(input_image,
                                             sam_predictor,
                                             sam_automask_generator,
                                             groundingdino_model,
-                                            device)
+                                            device).astype(np.uint8)
         except Exception as e:
             raise gr.Error("Please select the correct VLM model and input the correct API Key first!")
 
@@ -829,9 +829,9 @@ def process_mask(input_image,
                                 sam_predictor,
                                 sam_automask_generator,
                                 groundingdino_model,
-                                device)
+                                device).astype(np.uint8)
     else:
-        original_mask = input_mask
+        original_mask = input_mask.astype(np.uint8)
         category = None
 
     ## resize mask if needed
@@ -871,7 +871,6 @@ def process_mask(input_image,
             original_mask = resize(Image.fromarray(np.squeeze(original_mask)), target_width=int(output_w), target_height=int(output_h))
             original_mask = np.array(original_mask)
 
-    
 
     if original_mask.ndim == 2:
         original_mask = original_mask[:,:,None]
