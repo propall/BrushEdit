@@ -7,9 +7,6 @@ Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, M
 > TL;DR: BrushEdit is an advanced, unified AI agent for image inpainting and editing. <br>
 > Main Elements: 🛠️ Fully automated / 🤠 Interactive editing.
 
->[Yaowei Li](https://github.com/liyaowei-stu)<sup>1*</sup>, [Yuxuan Bian](https://yxbian23.github.io/)<sup>3*</sup>, [Xuan Ju](https://github.com/juxuan27)<sup>3*</sup>, [Zhaoyang Zhang](https://zzyfd.github.io/#/)<sup>2‡</sup>, [Junhao Zhuang](https://github.com/zhuang2002)<sup>4</sup>, [Ying Shan](https://www.linkedin.com/in/YingShanProfile/)<sup>2✉</sup>, [Yuexian Zou](https://www.ece.pku.edu.cn/info/1046/2146.htm)<sup>1✉</sup><br>, [Qiang Xu](https://cure-lab.github.io/)<sup>3✉</sup><br>
-><sup>1</sup>Peking University <sup>2</sup>ARC Lab, Tencent PCG  <sup>3</sup>The Chinese University of Hong Kong <sup>4</sup>Tsinghua University <br> <sup>*</sup>Equal Contribution <sup>‡</sup>Project Lead <sup>✉</sup>Corresponding Author
-
 <p align="center">
   <a href="https://liyaowei-stu.github.io/project/BrushEdit/">🌐Project Page</a> |
   <a href="https://arxiv.org/abs/2412.10316">📜Arxiv</a> |
@@ -17,10 +14,6 @@ Keywords: Image Inpainting, Image Generation, Image Editing, Diffusion Models, M
   <a href="https://huggingface.co/spaces/TencentARC/BrushEdit">🤗Hugging Face Demo</a> |
   <a href="https://huggingface.co/TencentARC/BrushEdit">🤗Hugging Model</a> |
 </p>
-
-https://github.com/user-attachments/assets/fde82f21-8b36-4584-8460-c109c195e614
-
-4K HD Introduction Video: [Youtube](https://www.youtube.com/watch?v=nDB7un9Rbdk).
 
 **📖 Table of Contents**
 
@@ -50,7 +43,7 @@ BrushEdit consists of four main steps: (i) Editing category classification: dete
 
 ![teaser](assets/brushedit_teaser.png)
 
-## 🚀 Getting Started
+## 🚀 Installation by Manjunadh
 
 ### Environment Requirement 🌍
 
@@ -58,28 +51,13 @@ BrushEdit has been implemented and tested on CUDA118, Pytorch 2.0.1, python 3.10
 
 Clone the repo:
 
-```
-git clone https://github.com/TencentARC/BrushEdit.git
-```
-
-We recommend you first use `conda` to create virtual environment, and install `pytorch` following [official instructions](https://pytorch.org/). For example:
-
-```
-conda create -n brushedit python=3.10.6 -y
-conda activate brushedit
+```bash
+git clone https://github.com/propall/BrushEdit.git
+conda create -n brushedit_env python=3.10.6 -y
+conda activate brushedit_env
 python -m pip install --upgrade pip
 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
-```
-
-Then, you can install diffusers (implemented in this repo) with:
-
-```
 pip install -e .
-```
-
-After that, you can install required packages thourgh:
-
-```
 pip install -r app/requirements.txt
 ```
 
@@ -191,32 +169,3 @@ sh app/run_app.sh
     <li> 🎨 <b>Negative prompt</b>: The negative prompt for the classifier-free guidance. </li>
     <li> 🎨 <b>Guidance scale</b>: The guidance scale for the classifier-free guidance. </li>
 </ul>
-
-## 🤝🏼 Cite Us
-
-```
-@misc{li2024brushedit,
-  title={BrushEdit: All-In-One Image Inpainting and Editing}, 
-  author={Yaowei Li and Yuxuan Bian and Xuan Ju and Zhaoyang Zhang and and Junhao Zhuang and Ying Shan and Yuexian Zou and Qiang Xu},
-  year={2024},
-  eprint={2412.10316},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
-}
-
-
-```
-
-## 💖 Acknowledgement
-Our code is modified based on [diffusers](https://github.com/huggingface/diffusers) and [BrushNet](https://github.com/TencentARC/BrushNet) here, thanks to all the contributors!
-
-
-## ❓ Contact
-For any question, feel free to email `liyaowei01@gmail.com`.
-
-## 🌟 Star History
-<p align="center">
-    <a href="https://star-history.com/#TencentARC/BrushEdit" target="_blank">
-        <img width="500" src="https://api.star-history.com/svg?repos=TencentARC/BrushEdit&type=Date" alt="Star History Chart">
-    </a>
-<p>
